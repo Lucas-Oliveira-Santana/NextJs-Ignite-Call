@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { api } from '@/lib/axios'
 import { AxiosError } from 'axios'
+import { ArrowRight } from 'phosphor-react'
 
 const registerFormSchema = z.object({
   username: z
@@ -48,6 +49,8 @@ export default function Register(props) {
         name: data.name,
         username: data.username,
       })
+
+      await router.push('/register/connect-calendar')
     } catch (err) {
       if (err instanceof AxiosError && err?.response?.data?.message) {
         alert(err.response.data.message)
@@ -94,6 +97,7 @@ export default function Register(props) {
 
         <Button type="submit" disabled={isSubmitting}>
           Próximo passo
+          <ArrowRight />
         </Button>
       </Form>
     </Container>
